@@ -20,7 +20,7 @@ ember install ember-leaflet-cartodb
 ```hbs
 {{#leaflet-map lat=lat lng=lng zoom=zoom as |layers|}}
   {{layers.tile url='http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'}}
-  {{cartodb-layer url='http://documentation.cartodb.com/api/v2/viz/836e37ca-085a-11e4-8834-0edbca4b5057/viz.json' legends=false zIndex=1}}
+  {{cartodb-layer url='http://nacis-workshop.cartodb.com/api/v2/viz/569d1940-336d-11e3-af98-5f54611e93d5/viz.json' zIndex=1}}
 {{/leaflet-map}}
 ```
 
