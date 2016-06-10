@@ -53,6 +53,7 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
+    "demoURL": "http://knownasilya.github.io/ember-leaflet-cartodb/",
     "after": [
       "ember-leaflet"
     ]
