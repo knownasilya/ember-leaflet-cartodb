@@ -24,6 +24,8 @@ ember install ember-leaflet-cartodb
 {{/leaflet-map}}
 ```
 
+> Note: Example is using Ember 2.3's Contextual Components feature.
+
 ## API
 
 ### `{{cartodb-layer}}`
