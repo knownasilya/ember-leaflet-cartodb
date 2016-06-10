@@ -1,26 +1,49 @@
-# Ember-leaflet-cartodb
+# ember-leaflet-cartodb
 
-This README outlines the details of collaborating on this Ember addon.
+Ember-Leaflet CartoDB.js layer component  
+`{{cartodb-layer url='...'}}`
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+This component only works when using [ember-leaflet], so install that first.
 
-## Running
+```shell
+ember install ember-leaflet-cartodb
+```
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+## Usage
 
-## Running Tests
+```hbs
+{{#leaflet-map lat=lat lng=lng zoom=zoom as |layers|}}
+  {{layers.tile url='http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'}}
+  {{cartodb-layer url='http://documentation.cartodb.com/api/v2/viz/836e37ca-085a-11e4-8834-0edbca4b5057/viz.json' legends=false zIndex=1}}
+{{/leaflet-map}}
+```
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+## API
 
-## Building
+### `{{cartodb-layer}}`
 
-* `ember build`
+A layer that takes a CartoDB viz url and renders it on the map.
 
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+#### `url`
+
+Takes a `string`, in the following form:
+
+> http://documentation.cartodb.com/api/v2/viz/836e37ca-085a-11e4-8834-0edbca4b5057/viz.json
+
+#### `legends`
+
+Disable the legend that comes from CartoDB. Defaults to `true` (enabled).
+
+#### `zIndex`
+
+Set the ordering of the layer compared to other layers used.
+
+
+## Contributing
+
+[CONTRIBUTING.md]
+
+[ember-leaflet]: http://www.ember-leaflet.com/
+[CONTRIBUTING.md]: CONTRIBUTING.md
