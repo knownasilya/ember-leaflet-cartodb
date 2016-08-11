@@ -33,6 +33,11 @@ export default BaseLayer.extend({
     }
   },
 
+  setSql: function() {
+    let SQL = this.get('sql');
+    this.layer.getSubLayer(0).setSQL(SQL);
+  }.observes('sql'),
+
   layerTeardown() {
     this.willDestroyLayer();
     this._removeEventListeners();
