@@ -48,7 +48,7 @@ Set the ordering of the layer compared to other layers used.
 
 #### `sql`
 
-Change the SQL query used in the Carto Viz. 
+Change the SQL query used in the Carto Viz provided by `url`.
 
 ## Contributing
 
