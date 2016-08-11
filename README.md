@@ -46,6 +46,9 @@ Disable the legend that comes from CartoDB. Defaults to `true` (enabled).
 
 Set the ordering of the layer compared to other layers used.
 
+#### `sql`
+
+Change the SQL query used in the Carto Viz. 
 
 ## Contributing
 
