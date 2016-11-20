@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import BaseLayer from 'ember-leaflet/components/base-layer';
 
+const { observer } = Ember;
+
 export default BaseLayer.extend({
   leafletRequiredOptions: [
     'url'
@@ -36,10 +38,10 @@ export default BaseLayer.extend({
     }
   },
 
-  setSql: function() {
+  setSql: observer('sql', function() {
     let SQL = this.get('sql');
     this.layer.getSubLayer(0).setSQL(SQL);
-  }.observes('sql'),
+  }),
 
   layerTeardown() {
     this.willDestroyLayer();
@@ -53,8 +55,10 @@ export default BaseLayer.extend({
   },
 
   createLayer() {
-    let map = Ember.get(this, 'containerLayer')._layer;
+    let map = this.get('containerLayer._layer');
+    let requiredOptions = this.get('requiredOptions');
+    let legends = this.getProperties('legends');
 
-    return cartodb.createLayer(map, ...this.get('requiredOptions'), this.getProperties('legends'));
+    return cartodb.createLayer(map, ...requiredOptions, legends);
   }
 });
