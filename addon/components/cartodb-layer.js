@@ -29,9 +29,17 @@ export default BaseLayer.extend({
         cdb.geo.LeafletMapView.addLayerToMap(layer, map, zIndex);
         this.layer = layer;
         this.didCreateLayer();
+        if(this.get('sql')) {
+          this.setSql();
+        }
       });
     }
   },
+
+  setSql: function() {
+    let SQL = this.get('sql');
+    this.layer.getSubLayer(0).setSQL(SQL);
+  }.observes('sql'),
 
   layerTeardown() {
     this.willDestroyLayer();
