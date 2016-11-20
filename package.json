@@ -1,6 +1,6 @@
 {
   "name": "ember-leaflet-cartodb",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Ember-Leaflet CartoDB.js Layer",
   "directories": {
     "doc": "doc",
