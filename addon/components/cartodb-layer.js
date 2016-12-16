@@ -23,8 +23,10 @@ export default BaseLayer.extend({
     this._layer = this.createLayer();
     this._addObservers();
     this._addEventListeners();
-    if (this.get('containerLayer')) {
-      let map = this.get('containerLayer')._layer;
+
+    let map = this.get('parentComponent._layer');
+
+    if (map) {
       let zIndex = this.get('options.zIndex');
 
       this._layer.on('done', (layer) => {
@@ -47,15 +49,19 @@ export default BaseLayer.extend({
     this.willDestroyLayer();
     this._removeEventListeners();
     this._removeObservers();
-    if (this.get('containerLayer') && this._layer && this.get('layer')) {
-      this.get('containerLayer')._layer.removeLayer(this.get('layer'));
+
+    let map = this.get('parentComponent._layer');
+
+    if (map && this._layer && this.get('layer')) {
+      map.removeLayer(this.get('layer'));
     }
+
     this._layer = null;
     this.layer = undefined;
   },
 
   createLayer() {
-    let map = this.get('containerLayer._layer');
+    let map = this.get('parentComponent._layer');
     let requiredOptions = this.get('requiredOptions');
     let legends = this.getProperties('legends');
 
