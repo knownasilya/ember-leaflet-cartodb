@@ -19,7 +19,7 @@ export default BaseLayer.extend({
     'url', 'zIndex', 'opacity'
   ],
 
-  layerSetup() {
+  didInsertParent() {
     this._layer = this.createLayer();
     this._addObservers();
     this._addEventListeners();
@@ -30,9 +30,13 @@ export default BaseLayer.extend({
       let zIndex = this.get('options.zIndex');
 
       this._layer.on('done', (layer) => {
+        // leaflet 1.0 hack, remove once cartodb.js supports leaflet 1.0
+        layer._adjustTilePoint = () => {};
+
         cdb.geo.LeafletMapView.addLayerToMap(layer, map, zIndex);
         this.layer = layer;
         this.didCreateLayer();
+
         if(this.get('sql')) {
           this.setSql();
         }
