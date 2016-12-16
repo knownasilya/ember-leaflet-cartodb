@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import BaseLayer from 'ember-leaflet/components/base-layer';
 
-const { observer } = Ember;
+const { run, observer } = Ember;
 
 export default BaseLayer.extend({
   leafletRequiredOptions: [
@@ -37,8 +37,18 @@ export default BaseLayer.extend({
         this.layer = layer;
         this.didCreateLayer();
 
-        if(this.get('sql')) {
+        if (this.get('sql')) {
           this.setSql();
+        }
+
+        if (this.get('onClick')) {
+          layer.getSubLayers().forEach((subLayer) => {
+            cdb.vis.Vis.addCursorInteraction(map, subLayer);
+            subLayer.setInteraction(true);
+            subLayer.on('featureClick', run.bind(this, (...args) => {
+              this.get('onClick')(...args);
+            }));
+          });
         }
       });
     }
@@ -49,7 +59,7 @@ export default BaseLayer.extend({
     this.layer.getSubLayer(0).setSQL(SQL);
   }),
 
-  layerTeardown() {
+  willDestroyParent() {
     this.willDestroyLayer();
     this._removeEventListeners();
     this._removeObservers();
@@ -66,9 +76,9 @@ export default BaseLayer.extend({
 
   createLayer() {
     let map = this.get('parentComponent._layer');
-    let requiredOptions = this.get('requiredOptions');
-    let legends = this.getProperties('legends');
+    let url = this.get('url');
+    let options = this.getProperties('legends');
 
-    return cartodb.createLayer(map, ...requiredOptions, legends);
+    return cartodb.createLayer(map, url, options);
   }
 });
