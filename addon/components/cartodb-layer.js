@@ -16,7 +16,7 @@ export default BaseLayer.extend({
   ],
 
   leafletProperties: [
-    'url', 'zIndex', 'opacity'
+    'url', 'zIndex', 'opacity', 'legends', 'infowindow'
   ],
 
   didInsertParent() {
@@ -77,7 +77,7 @@ export default BaseLayer.extend({
   createLayer() {
     let map = this.get('parentComponent._layer');
     let url = this.get('url');
-    let options = this.getProperties('legends');
+    let options = this.getProperties('legends', 'infowindow');
 
     return cartodb.createLayer(map, url, options);
   }

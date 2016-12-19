@@ -38,9 +38,22 @@ Takes a `string`, in the following form:
 
 > http://documentation.cartodb.com/api/v2/viz/836e37ca-085a-11e4-8834-0edbca4b5057/viz.json
 
+#### `onClick`
+
+An action that is fired when clicking a layer that has interactivity. All arguments are the same as those of
+Carto's `featureClick` event. This only works if using a version of Leaflet less then 1.0, so update your `bower.json` accordingly.
+
+```hbs
+{{cartodb-layer url='' onClick=(action 'mapClick')}}
+```
+
 #### `legends`
 
 Disable the legend that comes from CartoDB. Defaults to `true` (enabled).
+
+#### `infowindow`
+
+Disable the infowindow that opens if interactivity is set on one of the sublayers.
 
 #### `zIndex`
 
